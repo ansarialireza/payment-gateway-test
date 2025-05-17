@@ -126,13 +126,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-
-INSTALLED_APPS = [
-    # ....
-    "azbankgateways",
-    # ...
-]
-
 # Bank Payment Gateway Configuration
 AZ_IRANIAN_BANK_GATEWAYS = {
     "GATEWAYS": {
