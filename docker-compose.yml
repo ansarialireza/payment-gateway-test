@@ -2,23 +2,23 @@ version: "3.9"
 
 services:
 
-  # postgres:
-  #   container_name: postgres
-  #   image: postgres:latest
-  #   restart: always
-  #   environment:
-  #     POSTGRES_DB: ${DATABASE_NAME}
-  #     POSTGRES_USER: ${DATABASE_USER}
-  #     POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-  #     POSTGRES_HOST_AUTH_METHOD: trust
-  #   networks:
-  #     - my_network
-  #   volumes:
-  #     - postgres_data:/var/lib/postgresql/data
+  postgres:
+    container_name: new_postgres
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_HOST_AUTH_METHOD: trust
+    networks:
+      - my_network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   backend:
     build: .
-    container_name: backend
+    container_name: new_backend
     command: >
       sh -c "python manage.py makemigrations &&
              python manage.py migrate &&
@@ -38,7 +38,7 @@ services:
 
   nginx:
     image: nginx
-    container_name: nginx
+    container_name: new_nginx
     restart: always
     ports:
       - "80:80"
@@ -86,7 +86,7 @@ services:
 volumes:
   static_volume:
   media_volume:
-  # postgres_data:
+  postgres_data:
 
 networks:
   my_network:
