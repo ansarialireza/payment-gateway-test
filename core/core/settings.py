@@ -76,28 +76,28 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",  # Use PostgreSQL
-        "NAME": config("DATABASE_NAME"),  # Read DATABASE_NAME from environment
-        "USER": config("DATABASE_USER"),  # Read DATABASE_USER from environment
-        "PASSWORD": config(
-            "DATABASE_PASSWORD"
-        ),  # Read DATABASE_PASSWORD from environment
-        "HOST": config(
-            "DATABASE_HOST", default="localhost"
-        ),  # Read DATABASE_HOST from environment
-        "PORT": config(
-            "DATABASE_PORT", default="5432"
-        ),  # Read DATABASE_PORT from environment
-    }
-}
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',  # نوع پایگاه داده
-#         'NAME': BASE_DIR / 'db.sqlite3',         # مسیر فایل پایگاه داده
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",  # Use PostgreSQL
+#         "NAME": config("DATABASE_NAME"),  # Read DATABASE_NAME from environment
+#         "USER": config("DATABASE_USER"),  # Read DATABASE_USER from environment
+#         "PASSWORD": config(
+#             "DATABASE_PASSWORD"
+#         ),  # Read DATABASE_PASSWORD from environment
+#         "HOST": config(
+#             "DATABASE_HOST", default="localhost"
+#         ),  # Read DATABASE_HOST from environment
+#         "PORT": config(
+#             "DATABASE_PORT", default="5432"
+#         ),  # Read DATABASE_PORT from environment
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',  # نوع پایگاه داده
+        'NAME': BASE_DIR / 'db.sqlite3',         # مسیر فایل پایگاه داده
+    }
+}
 
 
 # Password validation
