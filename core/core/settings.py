@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-jy!7nr)177g@yv3#wiyruiu4r%lzh51vs7fx%gicz2rapnfaig
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="").split(",")
 
 
 # Application definition
@@ -92,6 +92,12 @@ DATABASES = {
         ),  # Read DATABASE_PORT from environment
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',  # نوع پایگاه داده
+#         'NAME': BASE_DIR / 'db.sqlite3',         # مسیر فایل پایگاه داده
+#     }
+# }
 
 
 # Password validation
@@ -151,6 +157,10 @@ AZ_IRANIAN_BANK_GATEWAYS = {
             "TERMINAL_CODE": config("BMI_TERMINAL_CODE"),
             "SECRET_KEY": config("BMI_SECRET_KEY"),
         },
+        # "ZARINPAL": {
+        #     "MERCHANT_CODE": "<YOUR MERCHANT CODE>",
+        #     "SANDBOX": 1,  # 0 disable, 1 active
+        # }
     },
     "IS_SAMPLE_FORM_ENABLE": True,
     "DEFAULT": "BMI",
@@ -164,3 +174,47 @@ AZ_IRANIAN_BANK_GATEWAYS = {
     "IS_SAFE_GET_GATEWAY_PAYMENT": False,
     "CUSTOM_APP": None,
 }
+
+
+
+# Security Settings
+SECURE_REFERRER_POLICY = config(
+    "SECURE_REFERRER_POLICY", default="strict-origin-when-cross-origin"
+)
+SECURE_BROWSER_XSS_FILTER = config("SECURE_BROWSER_XSS_FILTER", default=True, cast=bool)
+X_FRAME_OPTIONS = config("X_FRAME_OPTIONS", default="SAMEORIGIN")
+SECURE_CONTENT_TYPE_NOSNIFF = config(
+    "SECURE_CONTENT_TYPE_NOSNIFF", default=True, cast=bool
+)
+
+# HSTS Settings
+SECURE_HSTS_SECONDS = config(
+    "SECURE_HSTS_SECONDS", default=0, cast=int
+)  # Disable HSTS by default
+SECURE_HSTS_INCLUDE_SUBDOMAINS = config(
+    "SECURE_HSTS_INCLUDE_SUBDOMAINS", default=False, cast=bool
+)
+SECURE_HSTS_PRELOAD = config("SECURE_HSTS_PRELOAD", default=False, cast=bool)
+SECURE_SSL_REDIRECT = config(
+    "SECURE_SSL_REDIRECT", default=False, cast=bool
+)  # Force HTTPS redirection
+
+# CSRF settings
+CSRF_COOKIE_SECURE = config("CSRF_COOKIE_SECURE", default=False, cast=bool)
+CSRF_USE_SESSIONS = config("CSRF_USE_SESSIONS", default=True, cast=bool)
+CSRF_COOKIE_HTTPONLY = config("CSRF_COOKIE_HTTPONLY", default=True, cast=bool)
+
+# Session settings
+SESSION_COOKIE_SECURE = config("SESSION_COOKIE_SECURE", default=False, cast=bool)
+SESSION_COOKIE_SAMESITE = config("SESSION_COOKIE_SAMESITE", default="Lax")
+SESSION_EXPIRE_AT_BROWSER_CLOSE = config(
+    "SESSION_EXPIRE_AT_BROWSER_CLOSE", default=False, cast=bool
+)
+SESSION_COOKIE_AGE = config(
+    "SESSION_COOKIE_AGE", default=1209600, cast=int
+)  # 2 weeks in seconds
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='').split(',')
+
+# Add SECURE_PROXY_SSL_HEADER setting
+# USE_X_FORWARDED_HOST = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
